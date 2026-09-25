@@ -32,15 +32,22 @@ public class GewinnModel {
         this.spielerZahl = spielerZahl;
         berechneComputerZahl();
 
-        int diff = Math.abs(this.spielerZahl - this.computerZahl);
-        if (diff == 0) {
+        if (this.spielerZahl == this.computerZahl) {
             this.rundenErgebnis = 20;
-        } else if (diff == 1) {
+        } else if (this.spielerZahl == this.computerZahl + 1 || this.spielerZahl == this.computerZahl - 1) {
             this.rundenErgebnis = 5;
         } else {
             this.rundenErgebnis = -10;
         }
 
-        this.gesamtPunkte += this.rundenErgebnis;
+        this.gesamtPunkte = this.gesamtPunkte + this.rundenErgebnis;
+    }
+
+    public boolean hatGewonnen() {
+        return gesamtPunkte >= 100;
+    }
+
+    public boolean hatVerloren() {
+        return gesamtPunkte <= 0;
     }
 }
