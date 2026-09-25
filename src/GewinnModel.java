@@ -1,0 +1,26 @@
+import java.util.Random;
+
+public class GewinnModel {
+    private int gesamtPunkte;
+    private int spielerZahl;
+    private int computerZahl;
+    private int rundenErgebnis;
+    private Random random;
+
+    public GewinnModel() {
+        this.gesamtPunkte = 30;
+        this.random = new Random();
+    }
+
+    public int getGesamtPunkte() {
+        return gesamtPunkte;
+    }
+
+    public int getComputerZahl() {
+        return computerZahl;
+    }
+
+    public int getRundenErgebnis() {
+        return rundenErgebnis;
+    }
+}
