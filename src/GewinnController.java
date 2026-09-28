@@ -23,7 +23,7 @@ public class GewinnController implements ActionListener {
     }
 
     private void verarbeiteEingabe() {
-        if (model.hatGewonnen() == true || model.hatVerloren() == true) {
+        if (model.hatGewonnen() || model.hatVerloren()) {
             return;
         }
 
@@ -35,12 +35,24 @@ public class GewinnController implements ActionListener {
 
             model.berechneRunde(zahl);
             view.setComputerZahl(model.getComputerZahl());
-            view.setErgebnisse(model.getGesamtPunkte(), model.getRundenErgebnis());
+
+            if (model.hatGewonnen()) {
+                view.setRundenErgebnisText("Gewonnen!");
+            } else if (model.hatVerloren()) {
+                view.setRundenErgebnisText("Verloren");
+            } else {
+                if (model.getRundenErgebnis() > 0) {
+                    view.setRundenErgebnisText("+" + model.getRundenErgebnis());
+                } else {
+                    view.setRundenErgebnisText(String.valueOf(model.getRundenErgebnis()));
+                }
+            }
+            view.setGesamtPunkteText(String.valueOf(model.getGesamtPunkte()));
 
             view.getTxtEingabe().setEnabled(false);
             view.getBtnNochEinmal().setEnabled(true);
 
-            if (model.getRundenErgebnis() > 0 || model.hatGewonnen() == true) {
+            if (model.getRundenErgebnis() > 0 || model.hatGewonnen()) {
                 view.getLblPunkte().setBackground(Color.GREEN);
                 view.getLblRunde().setBackground(Color.GREEN);
             } else {
@@ -57,6 +69,7 @@ public class GewinnController implements ActionListener {
 
         view.getTxtEingabe().setEnabled(true);
         view.getBtnNochEinmal().setEnabled(false);
+        view.getTxtEingabe().requestFocus();
 
         view.getLblPunkte().setBackground(Color.WHITE);
         view.getLblRunde().setBackground(Color.WHITE);
