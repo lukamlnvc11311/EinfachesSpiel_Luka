@@ -8,6 +8,7 @@ public class GewinnController implements ActionListener {
     public GewinnController(GewinnModel model, GewinnView view) {
         this.model = model;
         this.view = view;
+        this.view.getBtnNochEinmal().setEnabled(false);
         this.view.addEingabeListener(this);
         this.view.addNochEinmalListener(this);
     }
@@ -45,9 +46,14 @@ public class GewinnController implements ActionListener {
         } else {
             view.setRundenErgebnisText(String.valueOf(model.getRundenErgebnis()));
         }
+
+        view.getTxtEingabe().setEnabled(false);
+        view.getBtnNochEinmal().setEnabled(true);
     }
 
     private void resetRunde() {
         view.reset();
+        view.getTxtEingabe().setEnabled(true);
+        view.getBtnNochEinmal().setEnabled(false);
     }
 }
