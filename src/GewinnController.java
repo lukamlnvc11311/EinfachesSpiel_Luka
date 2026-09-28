@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -39,6 +40,14 @@ public class GewinnController implements ActionListener {
             view.getTxtEingabe().setEnabled(false);
             view.getBtnNochEinmal().setEnabled(true);
 
+            if (model.getRundenErgebnis() > 0 || model.hatGewonnen() == true) {
+                view.getLblPunkte().setBackground(Color.GREEN);
+                view.getLblRunde().setBackground(Color.GREEN);
+            } else {
+                view.getLblPunkte().setBackground(Color.RED);
+                view.getLblRunde().setBackground(Color.RED);
+            }
+
         } catch (NumberFormatException ex) {
         }
     }
@@ -48,5 +57,8 @@ public class GewinnController implements ActionListener {
 
         view.getTxtEingabe().setEnabled(true);
         view.getBtnNochEinmal().setEnabled(false);
+
+        view.getLblPunkte().setBackground(Color.WHITE);
+        view.getLblRunde().setBackground(Color.WHITE);
     }
 }
