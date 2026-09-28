@@ -8,15 +8,11 @@ public class GewinnController implements ActionListener {
     public GewinnController(GewinnModel model, GewinnView view) {
         this.model = model;
         this.view = view;
-        initEvents();
+        this.view.getBtnNochEinmal().setEnabled(false);
+        this.view.addEingabeListener(this);
+        this.view.addNochEinmalListener(this);
     }
 
-    private void initEvents() {
-        view.addEingabeListener(this);
-        view.addNochEinmalListener(this);
-    }
-
-    @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == view.getTxtEingabe()) {
             verarbeiteEingabe();
@@ -26,7 +22,7 @@ public class GewinnController implements ActionListener {
     }
 
     private void verarbeiteEingabe() {
-        if (model.hatGewonnen() || model.hatVerloren()) {
+        if (model.hatGewonnen() == true || model.hatVerloren() == true) {
             return;
         }
 
@@ -40,11 +36,17 @@ public class GewinnController implements ActionListener {
             view.setComputerZahl(model.getComputerZahl());
             view.setErgebnisse(model.getGesamtPunkte(), model.getRundenErgebnis());
 
+            view.getTxtEingabe().setEnabled(false);
+            view.getBtnNochEinmal().setEnabled(true);
+
         } catch (NumberFormatException ex) {
         }
     }
 
     private void resetRunde() {
         view.reset();
+
+        view.getTxtEingabe().setEnabled(true);
+        view.getBtnNochEinmal().setEnabled(false);
     }
 }
