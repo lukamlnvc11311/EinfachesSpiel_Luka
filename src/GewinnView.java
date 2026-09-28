@@ -15,10 +15,7 @@ public class GewinnView extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setSize(480, 260);
         setLocationRelativeTo(null);
-        initLayout();
-    }
 
-    private void initLayout() {
         setLayout(new BorderLayout(10, 10));
         ((JPanel) getContentPane()).setBorder(new EmptyBorder(10, 10, 10, 10));
 
